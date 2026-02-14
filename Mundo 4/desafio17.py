@@ -1,8 +1,10 @@
 # Desafio 17
+
 from rich.panel import Panel
 from rich import print
 
 class Produto:
+    
     def __init__(self, nome, preco):
         self.nome = nome
         self.preco = preco
