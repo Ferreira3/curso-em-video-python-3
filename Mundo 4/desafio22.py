@@ -10,8 +10,19 @@ class ControleRemoto:
         self.volume = 1
         self.canais = [1, 2, 3, 4, 5]
         self.canal = 0
-        self.tv_desligada()
-    
+        self.ligada = False
+        self.menu_principal()
+
+    # Método para gerenciar os menus do controle remoto
+    def menu_principal(self):
+        while True:
+            if self.ligada:
+                if not self.tv_ligada():
+                    break
+            else:
+                if not self.tv_desligada():
+                    break
+
     # Método para mostrar a tv ligada, volume e canal
     def tv_ligada(self):
         while True:
@@ -25,7 +36,8 @@ class ControleRemoto:
 
             resp = input("< CH > | - VOL + ")
             if resp == '@':
-                self.tv_desligada()
+                self.ligada = False
+                return True
             elif resp == '-':
                 if self.volume > 1:
                     self.volume -= 1
@@ -38,8 +50,8 @@ class ControleRemoto:
             elif resp == '>':
                 if self.canal < 4:
                     self.canal += 1
-            elif resp == 0:
-                break
+            elif resp == '0':
+                return False
             else:
                 print("[red]Comando inválido! Tente novamente[/]")
                 input()
@@ -56,9 +68,10 @@ class ControleRemoto:
 
             resp = input("< CH > | - VOL + ")
             if resp == '@':
-                self.tv_ligada()
-            elif resp == 0:
-                break
+                self.ligada = True
+                return True
+            elif resp == '0':
+                return False
             else:
                 print("[red]Comando inválido! Tente novamente[/]")
                 input()

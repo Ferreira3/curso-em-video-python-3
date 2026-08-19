@@ -4,7 +4,7 @@ from rich import print
 
 class Caneta:
     
-    cores = {
+    CORES = {
         'vermelha': 'red',
         'azul': 'blue',
         'preta': 'black',
@@ -12,21 +12,21 @@ class Caneta:
     }
 
     def __init__(self, cor):
-        self.cor = Caneta.cores[cor]
-        self.cor_nome = cor
-        self.caneta_aberta = False
+        self.cor_nome = cor if cor in Caneta.CORES else 'preta'
+        self.cor_codigo = Caneta.CORES[self.cor_nome]
+        self.aberta = False
     
     def destampar(self):
-        self.caneta_aberta = True
+        self.aberta = True
     
     def escrever(self, texto):
-        if self.caneta_aberta == True:
-            print(f"[{self.cor}]{texto}[/{self.cor}]", end='')
+        if self.aberta:
+            print(f"[{self.cor_codigo}]{texto}[/{self.cor_codigo}]", end='')
         else:
-            print(f"A [{self.cor}]caneta {self.cor_nome}[/{self.cor}] está tampada!", end='')
+            print(f"A [{self.cor_codigo}]caneta {self.cor_nome}[/{self.cor_codigo}] está tampada!", end='')
 
     def quebrar_linha(self, n_linhas):
-        print('\n'  * n_linhas)
+        print('\n' * n_linhas)
 
 
 c1 = Caneta('azul')
