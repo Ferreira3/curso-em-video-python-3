@@ -24,13 +24,13 @@ class Carrinho():
 
         return f"    Total: R${total:.2f}"
 
-    def __add__(self, produtos: Produto|Carrinho):
-        if type(produtos) == Produto:
-            self.produtos.append([produtos.nome, produtos.preco])
-        elif type(produtos) == Carrinho:
-            self.produtos += produtos.produtos
+    def __add__(self, outro: Produto|Carrinho):
+        if isinstance(outro, Produto):
+            self.produtos.append([outro.nome, outro.preco])
+        elif isinstance(outro, Carrinho):
+            self.produtos += outro.produtos
         else:
-            raise Exception('Formato não suportado')
+            raise TypeError('Formato não suportado')
         
         return self
 
@@ -42,6 +42,7 @@ p4 = Produto('Monitor', 1250)
 
 c1 = Carrinho()
 c2 = Carrinho()
+
 c1 = c1 + p1 + p2
 c2 = c2 + p3
 print(c1.total())

@@ -13,10 +13,6 @@ class Arquivo(ABC):
     def nome_completo(self):
         return f"'{self._nome_completo}' ({self.tamanho:.1f}MB)"
 
-    @nome_completo.setter
-    def nome_completo(self, novo_nome:str = "Arquivo sem nome"):
-        self._nome_completo = novo_nome
-    
     @abstractmethod
     def abrir(self):
         pass
@@ -41,7 +37,6 @@ def abrir_arquivo(obj):
 a1 = DOC('prova', 250000)
 a2 = PDF('contrato', 1300000)
 a3 = 'Bolo de Goiaba'
-
 
 abrir_arquivo(a1)
 abrir_arquivo(a2)
